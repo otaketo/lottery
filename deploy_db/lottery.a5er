@@ -1,0 +1,266 @@
+﻿# A5:ER FORMAT:10
+# A5:ER ENCODING:UTF8
+# A5:ER Mk-1 Copyright (C)2007 m.matsubara
+# A5:SQL Mk-2 Copyright (C)1997 m.matsubara
+#  http://www.wind.sannet.ne.jp/m_matsu/developer/a5m2/
+
+[Manager]
+ProjectName=プレゼント抽選
+Author=
+MaxEntityRowShow=1000
+ReadOnlyRecommend=0
+Page=Main
+PageInfo="Main",7,"A4Landscape",$FFFFFF
+LogicalView=1
+DecodeDomain=0
+ViewModePageIndividually=1
+ViewMode=7
+ViewFormat=0
+UseNondependenceDashLine=0
+FontName=Tahoma
+FontSize=6
+PaperSize=A4Landscape
+HeaderLeft=
+HeaderCenter=%ProjectName%
+HeaderRight=%Date%
+FooterLeft=
+FooterCenter=
+FooterRight=
+ShowPageoutRelation=1
+RDBMSType=5
+RDBMSTypeName=MySQL
+GenerateDropTableStatement=1
+DropTableIfExists=1
+DefaultPkName=pk_%0:s
+DefaultPkIndexName=pki_%0:s
+DefaultIndexName=%0:s_IX%1:d
+DefaultFkName=%0:s_FK%1:d
+SqlSeparator=0
+ShowTag=1
+ShowCommonAttributes=0
+
+[Relation]
+Entity1=lots_master
+Entity2=present_to
+RelationType1=2
+RelationType2=3
+Fields1=lots_id
+Fields2=lots_id
+Cardinarity1=
+Cardinarity2=
+Position="MAIN",0,10000,7770,4079,R,R
+Dependence=0
+Caption=
+PName=
+ModifiedDateTime=20151104155125
+LineMode=0
+Bar1=1000
+Bar2=777
+Bar3=408
+TermPos1=R
+TermPos2=R
+
+[Relation]
+Entity1=lots_master
+Entity2=entry_lots
+RelationType1=2
+RelationType2=3
+Fields1=lots_id
+Fields2=lots_id
+Cardinarity1=
+Cardinarity2=
+Position="MAIN",0,3675,4863,4079,R,R
+Dependence=0
+Caption=
+PName=
+ModifiedDateTime=20151104155149
+LineMode=0
+Bar1=368
+Bar2=486
+Bar3=408
+TermPos1=R
+TermPos2=R
+
+[Relation]
+Entity1=lots_master
+Entity2=winning_number
+RelationType1=2
+RelationType2=3
+Fields1=lots_id
+Fields2=lots_id
+Cardinarity1=
+Cardinarity2=
+Position="MAIN",0,8943,4886,4356,R,R
+Dependence=0
+Caption=
+PName=
+ModifiedDateTime=20151104154718
+LineMode=0
+Bar1=894
+Bar2=489
+Bar3=436
+TermPos1=R
+TermPos2=R
+
+[Entity]
+PName=lots_master
+LName=抽選
+Comment=
+TableOption=
+Page=MAIN
+Left=2000
+Top=800
+Field="抽選ID","lots_id","MEDIUMINT","NOT NULL",0,"","",$FFFFFFFF,"AUTO_INCREMENT"
+Field="抽選年月","lots_month","MEDIUMINT","NOT NULL",,"","",$00FF0000,""
+Field="抽選開始日","open_lots","@DATETIME","NOT NULL",,"","",$FFFFFFFF,""
+Field="抽選締め切り","lots_deadline","@DATETIME","NOT NULL",,"","",$FFFFFFFF,""
+Field="作成日時","created","TIMESTAMP","NOT NULL",,"","",$FFFFFFFF,""
+Index=uix_lots=2,lots_month
+EffectMode=None
+Tag=MyISAM
+Color=$000000
+BkColor=$FFFFFF
+ModifiedDateTime=20160515133612
+Position="MAIN",2000,800
+
+[Relation]
+Entity1=user_master
+Entity2=present_to
+RelationType1=2
+RelationType2=3
+Fields1=uid
+Fields2=uid
+Cardinarity1=
+Cardinarity2=
+Position="MAIN",0,6682,3318,4508,R,R
+Dependence=0
+Caption=
+PName=fk_uid_present
+ModifiedDateTime=20151030162901
+LineMode=0
+Bar1=668
+Bar2=332
+Bar3=451
+TermPos1=R
+TermPos2=R
+
+[Relation]
+Entity1=user_master
+Entity2=entry_lots
+RelationType1=2
+RelationType2=3
+Fields1=uid
+Fields2=uid
+Cardinarity1=
+Cardinarity2=
+Position="MAIN",0,5066,4934,4620,R,R
+Dependence=0
+Caption=
+PName=fk_uid_entry
+ModifiedDateTime=20151030162848
+LineMode=0
+Bar1=507
+Bar2=493
+Bar3=462
+TermPos1=R
+TermPos2=R
+
+[Entity]
+PName=winning_number
+LName=当選番号
+Comment=
+TableOption=engine = InnoDB
+Page=MAIN
+Left=2150
+Top=1050
+Field="当選番号ID","winning_number_id","MEDIUMINT","NOT NULL",0,"","",$FFFFFFFF,"AUTO_INCREMENT"
+Field="抽選ID","lots_id","MEDIUMINT","NOT NULL",,"","",$00FF0000,""
+Field="当選番号","winning_number","MEDIUMINT","NOT NULL",,"","",$00FF0000,""
+Field="当選トークン","winning_token","@VARCHAR(32)","NOT NULL",,"","",$FFFFFFFF,""
+Field="作成日時","created","TIMESTAMP","NOT NULL",,"","",$FFFFFFFF,""
+Index=uix_winning_number=2,lots_id,winning_number
+EffectMode=None
+Tag=InnoDB
+Color=$000000
+BkColor=$FFFFFF
+ModifiedDateTime=20160515163606
+Position="MAIN",2150,1050
+
+[Entity]
+PName=present_to
+LName=プレゼント当選者
+Comment=
+TableOption=engine = InnoDB
+Page=MAIN
+Left=1250
+Top=1050
+Field="当選者ID","present_id","MEDIUMINT","NOT NULL",0,"","",$FFFFFFFF,"AUTO_INCREMENT"
+Field="抽選ID","lots_id","MEDIUMINT","NOT NULL",,"","",$00FF0000,""
+Field="UID","uid","MEDIUMINT(7) ZEROFILL","NOT NULL",,"","",$00FF0000,""
+Field="作成日時","created","TIMESTAMP","NOT NULL",,"","",$FFFFFFFF,""
+Index=uix_present_to=2,lots_id,uid
+EffectMode=None
+Tag=InnoDB
+Color=$000000
+BkColor=$FFFFFF
+ModifiedDateTime=20160215161233
+Position="MAIN",1250,1050
+
+[Entity]
+PName=entry_lots
+LName=プレゼント応募
+Comment=
+TableOption=engine = InnoDB
+Page=MAIN
+Left=1250
+Top=600
+Field="応募ID","entry_lots_id","MEDIUMINT","NOT NULL",0,"","",$FFFFFFFF,"AUTO_INCREMENT"
+Field="抽選ID","lots_id","MEDIUMINT","NOT NULL",,"","",$00FF0000,""
+Field="UID","uid","MEDIUMINT(7) ZEROFILL","NOT NULL",,"","",$00FF0000,""
+Field="整理券","numbered_ticket","MEDIUMINT","NOT NULL",,"","",$00FF0000,""
+Field="作成日時","created","TIMESTAMP","NOT NULL",,"","",$FFFFFFFF,""
+Index=uix_entry_lots_uid=2,lots_id,uid
+Index=uix_entry_lots_ticket=2,lots_id,numbered_ticket
+EffectMode=None
+Tag=InnoDB
+Color=$000000
+BkColor=$FFFFFF
+ModifiedDateTime=20160215161207
+Position="MAIN",1250,600
+
+[Comment]
+Comment=メモ\n青字はユニーク制約\n緑はインデックス
+FontName=Tahoma
+FontBold=0
+FontItalic=0
+FontUnderline=0
+FontSize=6
+FontColor=$000000
+LineColor=$000000
+BkColor=$FFFFFF
+Page=Main
+Left=50
+Top=100
+Width=368
+Height=90
+
+[Entity]
+PName=user_master
+LName=ユーザーマスタ
+Comment=
+TableOption=engine = InnoDB
+Page=MAIN
+Left=200
+Top=800
+Field="UID","uid","MEDIUMINT(7) ZEROFILL","NOT NULL",0,"","",$FFFFFFFF,"AUTO_INCREMENT"
+Field="都道府県コード","area_code","TINYINT(2) ZEROFILL","NOT NULL",,"","",$FFFFFFFF,""
+Field="性別","attr_gender","BOOLEAN","NOT NULL",,"","",$FFFFFFFF,""
+Field="生年","attr_birthday","SMALLINT UNSIGNED","NOT NULL",,"","",$FFFFFFFF,""
+Field="更新日時","modefied","@DATETIME","NOT NULL",,"","",$FFFFFFFF,""
+Field="作成日時","created","@DATETIME","NOT NULL",,"","",$FFFFFFFF,""
+EffectMode=None
+Tag=MyISAM
+Color=$000000
+BkColor=$FFFFFF
+ModifiedDateTime=20160515163645
+Position="MAIN",200,800
